@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+/*
+CORES
+bg: rgb(252, 246, 189)
+bordas: 
+texto:
+botões:
+*/
+
+body{
+    background-color: rgb(252, 246, 189);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Righteous", sans-serif;
+}
+
+.cat_image {
+    height: calc(var(--spacing) * 18) /* 3.5rem = 56px */;;
+  font-size: 1rem;            
+  color: black;
+  font-weight:bolder;
+  background-repeat: no-repeat;
+  background-size: contain;   
+  background-position: center;
+  border-radius: 1rem;     
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
