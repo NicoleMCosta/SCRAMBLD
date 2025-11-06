@@ -30,3 +30,12 @@ body{
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}
+
+
