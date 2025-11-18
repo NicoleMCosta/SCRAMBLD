@@ -12,15 +12,19 @@ interface GuessResult {
 
 interface Game {
     categoryName: string;
-    endTime: Date;
     score: number;
+	/** Quantidade maxima de categorias por jogo */
 	maxCategoryCount: number;
+	/** Quantidade maxima acertos por categoria */
+	maxRightGuessesPerCategory: number;
+	/** Quantidade de acertos na categoria atual */
+	rightGuessesCount: number;
 }
 
 interface GameCategory {
     category: string;
     words: string[]; // Palavras que ainda não foram adivinhadas
-    guessCounter: number;
+    rightGuessCounter: number;
 }
 
 export class Scramble {
@@ -31,14 +35,17 @@ export class Scramble {
     }
 
     // --- Configurações do Jogo ---
+
+	/** Quantidade de acertos por categoria */
     private readonly MAX_GUESS_COUNT = 5;
+	/** Quantidade de categorias por jogo */
     private readonly MAX_CATEGORY_COUNT = 5;
+	/** Tempo em segundos usado para calcular score */
     private readonly MIN_TIME_SECONDS = 30;
 
     // --- Estado do Jogo ---
     private _currentCategoryIndex = 0;
     private _startTime: Date;
-    private _endTime: Date;
 	private _score = 0;
 
     private _categories: GameCategory[];
@@ -48,7 +55,7 @@ export class Scramble {
         this._categories = Object.keys(vocabulary).map(categoryName => ({
             category: categoryName,
             words: vocabulary[categoryName],
-            guessCounter: 0
+            rightGuessCounter: 0
         }));
 
 		this.shuffleArray(this._categories);
@@ -64,9 +71,10 @@ export class Scramble {
     public getCurrentGame(): Game {
 		return {
 			categoryName: this._categories[this._currentCategoryIndex].category,
-			endTime: this._endTime,
 			score: this._score,
-			maxCategoryCount: this.MAX_CATEGORY_COUNT
+			maxCategoryCount: this.MAX_CATEGORY_COUNT,
+			maxRightGuessesPerCategory: this.MAX_GUESS_COUNT,
+			rightGuessesCount: this._categories[this._currentCategoryIndex].rightGuessCounter
 		}
 	}
 
@@ -77,21 +85,20 @@ export class Scramble {
 
 	private setTimes() {
 		this._startTime = new Date();
-		this._endTime = new Date();
-		this._endTime.setSeconds(this._endTime.getSeconds() + this.MIN_TIME_SECONDS - this._currentCategoryIndex);
 	}
 
 	private score() {
 		const now = new Date();
 		const seconds = (now.getTime() - this._startTime.getTime()) / 1000;
 		this._score += (this.MIN_TIME_SECONDS * 2) - seconds;
+		this._categories[this._currentCategoryIndex].rightGuessCounter += 1;
 		// Reseta o tempo do ultimo acerto
 		this._startTime = new Date();
 	}
 
 	public tryWord(word: string): GuessResult {
-		if (!this._endTime) {
-			this.setTimes();
+		if (!this._startTime) {
+			this._startTime = new Date();
 		}
 
 		if (this._categories[this._currentCategoryIndex].words.includes(word)) {
@@ -105,7 +112,7 @@ export class Scramble {
 
 		this.score();
 
-		if (this._categories[this._currentCategoryIndex].guessCounter == this.MAX_GUESS_COUNT - 1) {
+		if (this._categories[this._currentCategoryIndex].rightGuessCounter == this.MAX_GUESS_COUNT ) {
 			this.finishCategory();
 			return {
 				type: GuessType.RIGHT,
