@@ -11,16 +11,9 @@
 | Borda suave / sombra                    | ⚪ `rgba(255,255,255,0.08)`                             |
 */
 
-@layer utilities {
-  .no-scrollbar {
-    scrollbar-width: none;
-  }
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-}
 
 .cat_image {
+  width: 200px;
   height: calc(var(--spacing) * 18);
   font-size: 1rem;
   color: var(--pink);
@@ -31,6 +24,7 @@
   border-radius: 1rem;
   padding: 1.5rem 2rem;
   box-shadow: 0 4px 6px black;
+  text-align: center;
 }
 
 :root {
@@ -53,15 +47,24 @@ html, body, #root {
 }
 
 .title {
-  font-size: 6rem;
+  font-size: 4rem;
+  color: var(--accent);
+  letter-spacing: 4px;
+  font-weight: 800;
+}
+
+.s-title {
+  font-size: 1.5rem;
   color: var(--accent);
   margin: 6px 0;
+  padding: 10;
   letter-spacing: 4px;
   font-weight: 800;
 }
 
 @media (min-width:720px){
   .title { font-size: 6rem; }
+  .s-title {font-size: 4rem; padding: auto;}
 }
 
 .button-submit {
@@ -76,6 +79,22 @@ html, body, #root {
 }
 
 .button-submit:hover {
+  background-color: rgb(233, 122, 255);
+}
+
+.button{
+  align-self: flex-center;
+  background-color: var(--pink);
+  color: #3b003b;
+  padding: 0.5rem 3.75rem;
+  margin: 2.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 6px var(--light-box);
+  transition: background-color 0.3s ease;
+}
+
+
+.button:hover {
   background-color: rgb(233, 122, 255);
 }
 

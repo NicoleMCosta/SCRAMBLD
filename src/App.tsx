@@ -2,10 +2,12 @@ import './App.css';
 import React, { useState, useEffect } from "react";
 import shapesbg from "./assets/shapes.jpg"; //image from Freepik
 import { Scramble } from './server/server';
+import Win from './Win';
 
 function App() {
   const [word, setWord] = useState("");
   const [timerKey, setTimerKey] = useState(0); // reinicia o timer
+  const [win,setWin] = useState(false);
 
   const scramble = Scramble.getInstance();
   const cat_atual = scramble.getCurrentGame();
@@ -41,8 +43,11 @@ function App() {
     const result = scramble.tryWord(word);
     console.log(result);
 
-    setWord("");
+    if(result.isFinished){
+      setWin(true);
+    }
 
+    setWord("");
     // reinicia o timer ao enviar a palavra
     setTimerKey(prev => prev + 1);
   }
@@ -58,14 +63,11 @@ function App() {
     )
   }
 
-
-
   return (
     <>
       <div className="flex flex-col items-center w-screen h-screen">
-
         {/* CATEGORIAS */}
-        <div id="categories" className="flex flex-nowrap w-full justify-start md:justify-between items-center p-15 gap-2 overflow-auto no-scrollbar bg-transparent">
+        <div id="categories" className="flex flex-nowrap w-full justify-start md:justify-between items-center p-10 gap-4 overflow-x-auto">
             <Category id={1} cat_atual={cat_atual} />
             <Category id={2} cat_atual= '2' />
             <Category id={2} cat_atual="3" />
@@ -77,10 +79,9 @@ function App() {
             <Category id={2} cat_atual={cat_atual} />
             <Category id={2} cat_atual={cat_atual} />
             <Category id={2} cat_atual={cat_atual} />
-
         </div>
 
-        <main className='flex flex-col justify-center items-center w-screen'>
+        <main className='flex flex-col justify-center items-center w-screen h-screen'>
           <div className="mb-5r flex flex-col items-center">
             <h1 className="title">SCRAMBLE</h1>
           </div>
@@ -102,8 +103,15 @@ function App() {
           <div className="w-1/2 mt-5">
             <TimeBar key={timerKey} duration={20} />
           </div>
-
         </main>
+
+        {win && (<Win
+          wordsGuessed={5}
+          categoriesReached={3}
+          timeBonus={3423}
+          score={200000}/>)
+        }
+
       </div>
     </>
   );
