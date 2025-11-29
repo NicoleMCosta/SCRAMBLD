@@ -1,6 +1,6 @@
 import * as vocabulary from "../assets/vocabulary.json";
 
-enum GuessType {
+export enum GuessType {
 	RIGHT = "RIGHT",
 	WRONG = "WRONG",
 }
@@ -96,7 +96,8 @@ export class Scramble {
 	private score() {
 		const now = new Date();
 		const seconds = (now.getTime() - this._startTime.getTime()) / 1000;
-		this._score += (this.MIN_TIME_SECONDS * 2) - seconds;
+		const points = (this.MIN_TIME_SECONDS * 2) - seconds;
+		this._score += points >= 5 ? points + 5 : 5;
 		this._categories[this._currentCategoryIndex].rightGuessCounter += 1;
 		// Reseta o tempo do ultimo acerto
 		this._startTime = new Date();
@@ -107,7 +108,12 @@ export class Scramble {
 			this._startTime = new Date();
 		}
 
-		if (this._categories[this._currentCategoryIndex].words.includes(word)) {
+		const currentWords = this._categories[this._currentCategoryIndex].words;
+
+		word = word.charAt(word.length - 1) == 's' ? word.slice(0, word.length-1) : word;
+
+		// add plural check
+		if (currentWords.includes(word) || currentWords.includes(word + 's')) {
 			this._categories[this._currentCategoryIndex].words = this._categories[this._currentCategoryIndex].words.filter((x) => x != word)
 		} else {
 			return {

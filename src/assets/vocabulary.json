@@ -1,5 +1,5 @@
 {
-  "animals": [
+  "Animals": [
     "dog", "cat", "elephant", "lion", "tiger",
     "giraffe", "monkey", "rabbit", "horse", "zebra",
     "panda", "koala", "kangaroo", "wolf", "fox",
@@ -8,7 +8,7 @@
     "crocodile", "seal", "otter", "deer", "mouse",
     "squirrel", "bird", "fish"
   ],
-  "sports": [
+  "Sports": [
     "soccer", "basketball", "tennis", "swimming", "running",
     "baseball", "volleyball", "rugby", "boxing", "cycling",
     "hockey", "golf", "ping pong", "cricket", "squash",
@@ -17,7 +17,7 @@
     "track", "field", "canoeing", "sailing", "rock climbing",
     "archery"
   ],
-  "fruits": [
+  "Fruits": [
     "apple", "banana", "orange", "grape", "watermelon",
     "kiwi", "mango", "pear", "pineapple", "peach",
     "strawberry", "blueberry", "raspberry", "blackberry", "apricot",
@@ -26,7 +26,7 @@
     "lime", "avocado", "nectarine", "tangerine", "lychee",
     "passionfruit"
   ],
-  "vehicles": [
+  "Vehicles": [
     "car", "bus", "bicycle", "motorcycle", "train",
     "airplane", "boat", "truck", "helicopter", "scooter",
     "submarine", "ambulance", "taxi", "firetruck", "van",
@@ -35,7 +35,7 @@
     "balloon", "spaceship", "minivan", "coupe", "convertible",
     "sports car"
   ],
-  "colors": [
+  "Colors": [
     "red", "blue", "green", "yellow", "black",
     "white", "pink", "purple", "orange", "brown",
     "gray", "violet", "turquoise", "indigo", "beige",
@@ -44,7 +44,7 @@
     "maroon", "olive", "coral", "cream", "chartreuse",
     "amber"
   ],
-  "clothing": [
+  "Clothing": [
     "shirt", "pants", "jacket", "dress", "skirt",
     "sweater", "hat", "scarf", "shoes", "gloves",
     "socks", "tie", "belt", "blouse", "t-shirt",
@@ -53,7 +53,7 @@
     "sandals", "flip-flops", "scarf", "mittens", "bikini",
     "suspenders"
   ],
-  "professions": [
+  "Professions": [
     "doctor", "teacher", "engineer", "nurse", "chef",
     "scientist", "artist", "musician", "writer", "lawyer",
     "architect", "plumber", "electrician", "mechanic", "dentist",
@@ -62,16 +62,16 @@
     "pilot", "actor", "actress", "coach", "librarian",
     "accountant"
   ],
-  "fastfood": [
+  "Fastfood": [
     "burger", "fries", "hot dog", "pizza slice", "taco",
     "fried chicken", "onion rings", "chicken nuggets", "milkshake", "ketchup",
     "mustard", "mayo", "cheese fries", "pizza crust", "burrito",
     "nachos", "wrap", "popcorn chicken", "mozzarella sticks", "soft drink",
     "cola", "ice cream cone", "chicken sandwich", "french toast", "bagel",
     "onion dip", "gravy", "salad bowl", "cheeseburger", "donut",
-    "cheesesteak", "garlic bread"
+    "cheesesteak", "garlic bread", "pizza"
   ],
-  "instruments": [
+  "Instruments": [
     "guitar", "piano", "violin", "drums", "trumpet",
     "saxophone", "flute", "bass", "cello", "clarinet",
     "trombone", "harp", "keyboard", "accordion", "mandolin",
@@ -80,15 +80,16 @@
     "bassoon", "recorder", "banjo", "electric guitar", "tuba",
     "fiddle"
   ],
-  "bodyparts": [
+  "Bodyparts": [
     "head", "neck", "shoulders", "elbows", "wrists",
     "hands", "fingers", "thumbs", "chest", "back",
     "stomach", "waist", "hips", "knees", "thighs",
     "legs", "ankles", "feet", "toes", "eyes",
     "ears", "nose", "mouth", "teeth", "tongue",
-    "lips", "chin", "cheeks", "forehead", "eyebrows"
+    "lips", "chin", "cheeks", "forehead", "eyebrows",
+    "arms"
   ],
-  "officeobjects": [
+  "Office Objects": [
     "pen", "pencil", "notebook", "stapler", "paperclip",
     "highlighter", "scissors", "glue", "ruler", "eraser",
     "binder", "file folder", "printer", "calendar", "whiteboard",

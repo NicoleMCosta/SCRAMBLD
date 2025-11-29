@@ -1,8 +1,9 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
 import shapesbg from "./assets/shapes.jpg"; //image from Freepik
-import { Scramble } from './server/server';
+import { GuessType, Scramble } from './server/server';
 import Win from './Win';
+import confetti from 'canvas-confetti'
 
 function App() {
   const [word, setWord] = useState("");
@@ -10,8 +11,9 @@ function App() {
   const [win, setWin] = useState(false);
 
   const scramble = Scramble.getInstance();
-  const gameState = scramble.getCurrentGameState();
+  let gameState = scramble.getCurrentGameState();
   const categoriesList = scramble.getCategories();
+  let isTextDisabled = false;
 
   // === BARRA DE CONTAGEM REGRESSIVA (DENTRO DO APP) ===
   function TimeBar({ duration }: { duration: number }) {
@@ -36,16 +38,36 @@ function App() {
   }
   // =====================================================
 
+  useEffect(() => {
+    if (!win) return;
+  
+    const timer = setTimeout(() => {
+      confetti({ particleCount: 200, angle: 60, spread: 55, origin: { x: 0 }, ticks:100});
+      confetti({ particleCount: 200, angle: 120, spread: 55, origin: { x: 1 }, ticks:100 });
+    }, 100);
+  
+    return () => clearTimeout(timer);
+  }, [win]);
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setWord(word.trim());
     if (!word) return;
 
     const result = scramble.tryWord(word);
-    console.log(result);
+    gameState = scramble.getCurrentGameState();
 
-    if (result.isFinished) {
+
+    if (result.isFinished && gameState.currentCategory.index == gameState.maxCategoryCount) {
+      isTextDisabled = true;
       setWin(true);
+    }else if (result.type == GuessType.RIGHT) {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+        ticks: 50
+      });
     }
 
     setWord("");
@@ -84,7 +106,9 @@ function App() {
             <input
               type="text"
               id="words"
+              autoComplete="off"
               value={word}
+              disabled={isTextDisabled}
               onChange={(e) => setWord(e.target.value)}
               className="md:w-full h-20 p-5 bg-[#e6f3ea] text-[#111] text-m rounded-full hover:border-4 hover:border-[#09e06f]"
               placeholder="Digite suas palavras!"
@@ -100,10 +124,10 @@ function App() {
         </main>
 
         {win && (<Win
-          wordsGuessed={5}
-          categoriesReached={3}
+          wordsGuessed={gameState.maxRightGuessesPerCategory * gameState.maxCategoryCount}
+          categoriesReached={gameState.maxCategoryCount}
           timeBonus={3423}
-          score={200000} />)
+          score={gameState.score} />)
         }
 
       </div>
