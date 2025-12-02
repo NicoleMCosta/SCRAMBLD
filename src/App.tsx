@@ -111,7 +111,7 @@ function App() {
             />
           </form>
 
-            <button onClick={()=>{setWin(true)}} className="button-submit">Give Up</button>
+          <button type="button" onClick={()=>{setWin(true)}} className="button-submit">Give Up</button>
           {/* BARRA DE TEMPO */}
           <div className="w-1/2 mt-5">
             <ProgressBar />
